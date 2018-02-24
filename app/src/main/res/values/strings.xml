@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">StatusSaver</string>
+
+    <string name="photos">Photos</string>
+    <string name="videos">Videos</string>
+    <string name="gifs">GIFs</string>
+</resources>
