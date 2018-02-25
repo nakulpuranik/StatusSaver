@@ -4,13 +4,19 @@
     android:layout_height="match_parent"
     tools:context="com.whatsap.statussaver.fragment.PhotosFragment">
 
-    
-    <TextView
-        android:layout_width="wrap_content"
+
+    <GridView
+        android:id="@+id/gv_photos"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/photos"
-        android:textSize="40sp"
-        android:textStyle="bold"/>
+        android:layout_margin="@dimen/dp_5"
+        android:columnWidth="@dimen/dp_100"
+        android:drawSelectorOnTop="true"
+        android:gravity="center"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="@dimen/dp_5"
+        android:focusable="true"
+        android:clickable="true"/>
 
 </RelativeLayout>

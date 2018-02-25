@@ -2,32 +2,150 @@ package com.whatsap.statussaver.fragment;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.AdapterView;
+import android.widget.GridView;
 import com.whatsap.statussaver.R;
+import com.whatsap.statussaver.adapter.GridImageAdapter;
+import com.whatsap.statussaver.utils.AppConstants;
+import java.io.File;
+import java.util.ArrayList;
 
 
 public class PhotosFragment extends Fragment {
 
+    private ArrayList<File> fileList = new ArrayList<>();
+
+    private ArrayList<File> allImageFiles = new ArrayList<>();
+
+    private File file;
+
+    private GridView gvPhotos;
+
+    private GridImageAdapter gridImageAdapter;
 
     public PhotosFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_photos, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_photos, container, false);
+
+        initView(view);
+
+        getAllStatusPhotos();
+
+        setAdapter();
+
+        setListener();
+
+        return view;
+    }
+
+    private void initView(View view) {
+
+        gvPhotos = (GridView) view.findViewById(R.id.gv_photos);
+    }
+
+    private void setListener() {
+
+        gvPhotos.setOnItemClickListener(new ImageClickListener());
+    }
+
+    private void setAdapter() {
+
+        if (allImageFiles != null && allImageFiles.size() > 0) {
+
+            gridImageAdapter = new GridImageAdapter(getActivity(), allImageFiles);
+
+            gvPhotos.setAdapter(gridImageAdapter);
+
+        }
+    }
+
+    private class ImageClickListener implements AdapterView.OnItemClickListener {
+
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            File file = (File) parent.getItemAtPosition(position);
+
+
+        }
+    }
+
+    /**
+     * Get all the whatsapp status photos
+     **/
+    private void getAllStatusPhotos() {
+
+        try {
+
+            file = new File(Environment.getExternalStorageDirectory().getPath()
+            + AppConstants.PATH_TO_STATUSES_DIR);
+
+            allImageFiles = getFile(file);
+
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+        }
+
+    }
+
+
+    /**
+     * Get all the files within specified directory, store into an arraylist
+     * and return that arraylist.
+     * @param dir
+     **/
+    private ArrayList<File> getFile(File dir) {
+
+        File listOfFiles[] = dir.listFiles();
+
+        if (listOfFiles != null && listOfFiles.length > 0) {
+
+            if (fileList != null) {
+
+                fileList.clear();
+            }
+
+            for (int index = 0; index < listOfFiles.length; index++) {
+
+                if (listOfFiles[index].isDirectory()) {
+
+                    fileList.add(listOfFiles[index]);
+
+                    getFile(listOfFiles[index]);
+
+                } else {
+
+                    if (listOfFiles[index].getName().endsWith(".png")
+                            || listOfFiles[index].getName().endsWith(".jpeg")
+                            || listOfFiles[index].getName().endsWith(".jpg")
+                            || listOfFiles[index].getName().endsWith(".gif")) {
+
+                        fileList.add(listOfFiles[index]);
+                    }
+                }
+            }
+        }
+
+        return fileList;
     }
 
 }
