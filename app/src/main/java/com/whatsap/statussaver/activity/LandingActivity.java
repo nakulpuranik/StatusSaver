@@ -1,11 +1,13 @@
 package com.whatsap.statussaver.activity;
 
 import android.app.Activity;
+import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.whatsap.statussaver.R;
 import com.whatsap.statussaver.adapter.ViewPagerAdapter;
@@ -45,6 +47,7 @@ public class LandingActivity extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
 
     }
 

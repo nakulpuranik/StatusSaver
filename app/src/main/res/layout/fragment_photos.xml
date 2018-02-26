@@ -2,21 +2,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.whatsap.statussaver.fragment.PhotosFragment">
+    tools:context="com.whatsap.statussaver.fragment.PhotosFragment"
+    android:padding="@dimen/dp_10">
 
 
     <GridView
         android:id="@+id/gv_photos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_5"
+        android:layout_marginTop="@dimen/dp_15"
         android:columnWidth="@dimen/dp_100"
-        android:drawSelectorOnTop="true"
         android:gravity="center"
-        android:numColumns="auto_fit"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="@dimen/dp_5"
+        android:numColumns="3"
+        android:stretchMode="spacingWidthUniform"
+        android:verticalSpacing="@dimen/dp_10"
         android:focusable="true"
-        android:clickable="true"/>
+        android:clickable="true"
+        android:fastScrollEnabled="true"
+        android:scrollbars="vertical"/>
 
 </RelativeLayout>

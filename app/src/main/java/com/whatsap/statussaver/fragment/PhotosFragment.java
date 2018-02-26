@@ -1,16 +1,17 @@
 package com.whatsap.statussaver.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import com.whatsap.statussaver.R;
+import com.whatsap.statussaver.activity.PhotoViewActivity;
 import com.whatsap.statussaver.adapter.GridImageAdapter;
 import com.whatsap.statussaver.utils.AppConstants;
 import java.io.File;
@@ -84,6 +85,13 @@ public class PhotosFragment extends Fragment {
 
             File file = (File) parent.getItemAtPosition(position);
 
+            //Sending image id to PhotoViewActivity
+
+            Intent intent = new Intent(getActivity(), PhotoViewActivity.class);
+
+            intent.putExtra(AppConstants.IMAGE_PATH, file.getAbsolutePath());
+
+            startActivity(intent);
 
         }
     }

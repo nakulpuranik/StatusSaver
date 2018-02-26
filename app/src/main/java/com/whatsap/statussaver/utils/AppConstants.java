@@ -10,4 +10,7 @@ public class AppConstants {
 
     public static final int PERMISSION_REQUEST_STORAGE = 109;
 
+    public static final String IMAGE_ID = "IMAGE_ID";
+    public static final String IMAGE_PATH = "IMAGE_PATH";
+
 }
