@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
+    flavorDimensions "default"
     defaultConfig {
         applicationId "com.whatsap.statussaver"
         minSdkVersion 15
@@ -13,7 +14,24 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            applicationIdSuffix ".release"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            applicationIdSuffix ".debug"
+        }
+    }
+    productFlavors {
+        free {
+            applicationId "com.whatsap.statussaver.free"
+            versionCode 1
+            versionName "1.0"
+        }
+
+        paid {
+            applicationId "com.whatsap.statussaver.paid"
+            versionCode 1
+            versionName "1.0"
         }
     }
 }
